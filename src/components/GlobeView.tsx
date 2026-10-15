@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState }
 import Globe, { type GlobeMethods } from 'react-globe.gl';
 import { MeshPhongMaterial, Color } from 'three';
 import { featureKey, loadCountries, type CountryFeature } from '../lib/geo';
-import { STATE_COLOR, STATE_SHAPE, STATE_LABEL, clusterMarkers, altToClusterKm, type MarkerDatum } from '../lib/markers';
+import { STATE_LABEL, clusterMarkers, altToClusterKm, markerSvg, type MarkerDatum } from '../lib/markers';
 
 export interface GlobeHandle {
   flyTo: (lat: number, lng: number, alt?: number, ms?: number) => void;
@@ -31,15 +31,6 @@ interface Props {
 }
 
 const HOME = { lat: 18, lng: 10, altitude: 1.9 };
-
-function shapeSvg(shape: string, color: string, selected: boolean): string {
-  const sw = selected ? 3 : 2;
-  const common = `fill="${color}" stroke="#06101f" stroke-width="${sw}"`;
-  if (shape === 'square') return `<rect x="4" y="4" width="16" height="16" rx="3" ${common}/><path d="M8 12.5l3 3 5-6" fill="none" stroke="#06101f" stroke-width="2.2" stroke-linecap="round"/>`;
-  if (shape === 'diamond') return `<path d="M12 2l10 10-10 10L2 12z" ${common}/>`;
-  if (shape === 'star') return `<path d="M12 1.5l3 6.6 7.2.8-5.4 4.8 1.6 7.1L12 17.1 5.6 20.8l1.6-7.1L1.8 8.9l7.2-.8z" ${common}/>`;
-  return `<circle cx="12" cy="12" r="8" ${common}/>`;
-}
 
 /** Interactive WebGL globe (three-globe). Country polygons come from bundled Natural Earth data. */
 export const GlobeView = forwardRef<GlobeHandle, Props>(function GlobeView(p, ref) {
@@ -130,8 +121,8 @@ export const GlobeView = forwardRef<GlobeHandle, Props>(function GlobeView(p, re
     if (m.cluster) {
       el.innerHTML = `<span class="gcount">${m.cluster.count}</span>`;
     } else {
-      const size = m.state === 'discover' ? 18 : 26;
-      el.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${shapeSvg(STATE_SHAPE[m.state], STATE_COLOR[m.state], sel)}</svg>${m.state !== 'discover' || sel ? `<span class="glabel">${m.name.replace(/\s*\(.*\)/, '')}</span>` : ''}`;
+      const size = m.state === 'discover' ? 20 : 30;
+      el.innerHTML = `${markerSvg(m.state, sel, size)}${m.state !== 'discover' || sel ? `<span class="glabel">${m.name.replace(/\s*\(.*\)/, '')}</span>` : ''}`;
     }
     el.addEventListener('click', (e) => { e.stopPropagation(); if (m.cluster) props.current.onCluster(m); else props.current.onSelect(m.id); });
     elCache.current.set(key, el);

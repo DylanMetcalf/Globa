@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { Place, Priority, SavedPlace, SavedStatus } from '../../shared/types';
 import { Icon } from '../components/Icon';
+import { RunningCouple } from '../components/Mascots';
 import { PlaceImage } from '../components/PlaceArt';
 import { AddToTripDialog, LitPill, announce } from '../components/PlaceBits';
 import { useStore, priorityOrder } from '../store';
@@ -129,7 +130,7 @@ export default function SavedPage() {
     return (
       <div className="page"><div className="page-inner">
         <header className="page-head"><div><div className="eyebrow">Saved places</div><h1>Our collection</h1></div></header>
-        <div className="empty"><svg className="art" viewBox="0 0 120 90" aria-hidden="true"><path d="M30 10h60a4 4 0 0 1 4 4v66l-34-18-34 18V14a4 4 0 0 1 4-4Z" fill="var(--accent-soft)" stroke="var(--accent)" strokeWidth="3" /></svg>
+        <div className="empty"><RunningCouple size={132} className="art" />
           <h3>Nothing saved yet</h3><p>Save places from the globe, a destination brief or Discover. Every place you save becomes a possibility.</p>
           <div className="row" style={{ justifyContent: 'center' }}><Link className="btn primary" to="/"><Icon name="globe" />Explore the globe</Link><Link className="btn" to="/discover"><Icon name="discover" />Discover places</Link></div></div>
       </div></div>

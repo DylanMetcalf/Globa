@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { Place } from '../../shared/types';
 import { Icon } from '../components/Icon';
+import { Spaceship } from '../components/Mascots';
 import { SearchBox } from '../components/SearchBox';
 import { ActiveChips, FiltersPanel } from '../components/FiltersPanel';
 import { AddToTripDialog, PlaceCard } from '../components/PlaceBits';
@@ -57,10 +58,11 @@ export default function DiscoverPage() {
         <header className="page-head">
           <div>
             <div className="eyebrow">Discover</div>
-            <h1>Where could we live next?</h1>
+            <h1>Where could <em>we</em> live next?</h1>
             <p>Describe what you want in your own words, or build it from filters. We rank real places from our catalogue and explain every match.</p>
           </div>
-          <div className="row wrap" style={{ gap: 6 }}>
+          <div className="row wrap" style={{ gap: 6, alignItems: 'center' }}>
+            <span className="head-art hide-sm" aria-hidden="true"><Spaceship size={150} /></span>
             <span className={`badge ${aiState === 'live' ? 'ai' : 'demo'}`} title={status?.ai.state === 'live' ? `${status.ai.provider} · ${status.ai.model}` : 'No AI key configured on the server'}>
               {aiState === 'live' ? `AI mode · ${status?.ai.model}` : 'Demo mode · no AI key configured'}
             </span>

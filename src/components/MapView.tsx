@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import L from 'leaflet';
 import { loadCountries } from '../lib/geo';
-import { STATE_COLOR, STATE_LABEL, STATE_SHAPE, clusterMarkers, zoomToClusterKm, type MarkerDatum } from '../lib/markers';
+import { STATE_LABEL, clusterMarkers, markerSvg, zoomToClusterKm, type MarkerDatum } from '../lib/markers';
 import { api } from '../services/api';
 
 export interface MapHandle {
@@ -26,16 +26,9 @@ interface Props {
 
 function iconHtml(m: MarkerDatum, sel: boolean): string {
   if (m.cluster) return `<span class="gmark cluster"><span class="gcount">${m.cluster.count}</span></span>`;
-  const size = m.state === 'discover' ? 18 : 26;
-  const c = STATE_COLOR[m.state]; const shape = STATE_SHAPE[m.state];
-  const sw = sel ? 3 : 2;
-  const common = `fill="${c}" stroke="#06101f" stroke-width="${sw}"`;
-  const svg = shape === 'square' ? `<rect x="4" y="4" width="16" height="16" rx="3" ${common}/><path d="M8 12.5l3 3 5-6" fill="none" stroke="#06101f" stroke-width="2.2" stroke-linecap="round"/>`
-    : shape === 'diamond' ? `<path d="M12 2l10 10-10 10L2 12z" ${common}/>`
-    : shape === 'star' ? `<path d="M12 1.5l3 6.6 7.2.8-5.4 4.8 1.6 7.1L12 17.1 5.6 20.8l1.6-7.1L1.8 8.9l7.2-.8z" ${common}/>`
-    : `<circle cx="12" cy="12" r="8" ${common}/>`;
+  const size = m.state === 'discover' ? 20 : 30;
   const label = m.state !== 'discover' || sel ? `<span class="glabel">${m.name.replace(/\s*\(.*\)/, '')}</span>` : '';
-  return `<span class="gmark ${m.state} ${sel ? 'sel' : ''}"><svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${svg}</svg>${label}</span>`;
+  return `<span class="gmark ${m.state} ${sel ? 'sel' : ''}">${markerSvg(m.state, sel, size)}${label}</span>`;
 }
 
 /** 2D map (Leaflet). Shares markers with the globe. Country polygons are drawn locally so the map never renders blank offline. */

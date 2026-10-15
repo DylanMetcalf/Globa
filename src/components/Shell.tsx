@@ -6,12 +6,12 @@ import { useStore, activeProfile } from '../store';
 import { useUi } from '../store/ui';
 import { Assistant } from './Assistant';
 
-const NAV: { to: string; label: string; icon: IconName; end?: boolean }[] = [
-  { to: '/', label: 'Explore', icon: 'explore', end: true },
-  { to: '/discover', label: 'Discover', icon: 'discover' },
-  { to: '/saved', label: 'Saved', icon: 'saved' },
-  { to: '/itineraries', label: 'Trips', icon: 'trips' },
-  { to: '/our-world', label: 'Our World', icon: 'world' },
+const NAV: { to: string; label: string; icon: IconName; end?: boolean; c?: string }[] = [
+  { to: '/', label: 'Explore', icon: 'explore', end: true, c: 'nav-explore' },
+  { to: '/discover', label: 'Discover', icon: 'discover', c: 'nav-discover' },
+  { to: '/saved', label: 'Saved', icon: 'saved', c: 'nav-saved' },
+  { to: '/itineraries', label: 'Trips', icon: 'trips', c: 'nav-trips' },
+  { to: '/our-world', label: 'Our World', icon: 'world', c: 'nav-our-world' },
 ];
 
 function Avatar() {
@@ -50,7 +50,7 @@ export function Shell() {
       <nav className="rail" aria-label="Main">
         <NavLink to="/" className="brand" aria-label="GLOBA home"><LogoMark size={46} /></NavLink>
         {NAV.map((n) => (
-          <NavLink key={n.to} to={n.to} end={n.end} className="navlink"><Icon name={n.icon} /><span>{n.label}</span></NavLink>
+          <NavLink key={n.to} to={n.to} end={n.end} className={`navlink ${n.c ?? ''}`}><Icon name={n.icon} /><span>{n.label}</span></NavLink>
         ))}
         <div className="spacer" />
         <button className="navlink" onClick={() => setAssistantOpen(true)} aria-label="Open travel assistant"><Icon name="sparkles" /><span>Ask</span></button>
@@ -68,7 +68,7 @@ export function Shell() {
       </main>
       <nav className="tabbar" aria-label="Main">
         {NAV.map((n) => (
-          <NavLink key={n.to} to={n.to} end={n.end} className="navlink"><Icon name={n.icon} /><span>{n.label}</span></NavLink>
+          <NavLink key={n.to} to={n.to} end={n.end} className={`navlink ${n.c ?? ''}`}><Icon name={n.icon} /><span>{n.label}</span></NavLink>
         ))}
       </nav>
       <Assistant />

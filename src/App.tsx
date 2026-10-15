@@ -5,7 +5,7 @@ import { Intro } from './components/Intro';
 import { useStore } from './store';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ExplorePage } from './pages/ExplorePage';
-import { LogoMark } from './components/Logo';
+import { RunningCouple } from './components/Mascots';
 
 const DiscoverPage = lazy(() => import('./pages/DiscoverPage'));
 const SavedPage = lazy(() => import('./pages/SavedPage'));
@@ -19,7 +19,7 @@ const LightItUpPage = lazy(() => import('./pages/LightItUpPage'));
 
 const Loading = () => (
   <div style={{ flex: 1, display: 'grid', placeItems: 'center' }} role="status" aria-label="Loading">
-    <div className="stack center" style={{ alignItems: 'center' }}><LogoMark size={48} animated /><span className="muted small">Loading…</span></div>
+    <div className="stack center" style={{ alignItems: 'center' }}><RunningCouple size={84} /><span className="muted small">Packing for the trip…</span></div>
   </div>
 );
 

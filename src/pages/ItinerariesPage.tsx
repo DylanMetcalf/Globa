@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { Itinerary } from '../../shared/types';
 import { Icon } from '../components/Icon';
+import { RunningCouple } from '../components/Mascots';
 import { PlaceArt, PlaceImage } from '../components/PlaceArt';
 import { useStore } from '../store';
 import { useUi } from '../store/ui';
@@ -75,7 +76,7 @@ export default function ItinerariesPage() {
 
       {trips.length === 0 ? (
         <div className="empty">
-          <svg className="art" viewBox="0 0 120 90" aria-hidden="true"><path d="M20 70c20-40 40 10 60-30 8-16 16-14 20-10" fill="none" stroke="var(--accent)" strokeWidth="4" strokeLinecap="round" strokeDasharray="2 9" /><circle cx="20" cy="70" r="7" fill="var(--st-planned)" /><circle cx="100" cy="30" r="9" fill="var(--st-activated)" /></svg>
+          <RunningCouple size={132} className="art" />
           <h3>No itineraries yet</h3><p>Start with a few questions and we’ll draft a day-by-day plan you can edit — or add a place to a new itinerary from anywhere in the app.</p>
           <div className="row" style={{ justifyContent: 'center' }}><Link className="btn primary" to="/itineraries/new"><Icon name="plus" />Plan something</Link><Link className="btn" to="/discover">Find a destination first</Link></div>
         </div>

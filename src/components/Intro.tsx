@@ -34,7 +34,7 @@ export function Intro({ returning, onDone }: { returning: boolean; onDone: () =>
       <div className="intro-globe" aria-hidden="true"><OrthoGlobe markers={SPARKS} speed={0.35} initial={[10, -18]} reduced={reduced} /></div>
       <div className="intro-rings" aria-hidden="true"><i /><i /><i /></div>
       <div className="intro-center">
-        <div className="intro-mark"><LogoMark size={returning ? 92 : 120} animated={!reduced} /></div>
+        <div className="intro-mark"><LogoMark size={returning ? 110 : 150} animated={!reduced} /></div>
         <h1 className="intro-word" aria-label="GLOBA">
           {letters.map((l, i) => <span key={i} style={{ transitionDelay: `${i * 90}ms` }} aria-hidden="true">{l}</span>)}
         </h1>

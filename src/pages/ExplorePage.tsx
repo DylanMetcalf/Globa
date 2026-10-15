@@ -9,6 +9,7 @@ import { SearchBox } from '../components/SearchBox';
 import { FiltersPanel, ActiveChips } from '../components/FiltersPanel';
 import { PlaceActions, StatusPill, LitPill, AddToTripDialog, PlaceCard } from '../components/PlaceBits';
 import { PlaceImage } from '../components/PlaceArt';
+import { ShipDrift } from '../components/Mascots';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { useStore } from '../store';
 import { useUi, type LayerKey } from '../store/ui';
@@ -239,6 +240,8 @@ export function ExplorePage() {
           </div>
         )}
       </div>
+
+      {!mobile && <ShipDrift />}
 
       {/* top controls */}
       <div className="hud-top">

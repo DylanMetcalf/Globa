@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '../components/Icon';
+import { RunningCouple } from '../components/Mascots';
 import { OrthoGlobe } from '../components/OrthoGlobe';
 import { CharacterPortrait } from '../components/CharacterPortrait';
 import { useStore } from '../store';
@@ -72,8 +73,8 @@ export default function OurWorldPage() {
   return (
     <div className="page"><div className="page-inner">
       <header className="page-head">
-        <div><div className="eyebrow">Our world</div><h1>Every place we light up is part of our story</h1><p>Everything here is counted from what you have actually done. No streaks, no daily pressure — just the world, in progress.</p></div>
-        <Link className="btn gold" to="/saved"><Icon name="bulb" />Pick a place to light up</Link>
+        <div><div className="eyebrow">Our world</div><h1>Every place we light up is <em>part of our story</em></h1><p>Everything here is counted from what you have actually done. No streaks, no daily pressure — just the world, in progress.</p></div>
+        <div className="row" style={{ gap: 16 }}><span className="hide-sm" aria-hidden="true"><RunningCouple size={96} /></span><Link className="btn gold" to="/saved"><Icon name="bulb" />Pick a place to light up</Link></div>
       </header>
 
       <div className="world-top">

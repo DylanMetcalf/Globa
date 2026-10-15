@@ -8,7 +8,7 @@ import { useStore } from '../store';
 import { useUi } from '../store/ui';
 import { useCatalog, useIsMobile, useReducedMotion, hasWebGL } from '../lib/hooks';
 import { celebrationFor, CELEBRATION_LABEL } from '../game/characters';
-import { GameScene, themeFor } from '../game/GameScene';
+import { GameScene, themeFor, ALL_THEMES, PALETTES, type Theme } from '../game/GameScene';
 import { playSound, startAmbience } from '../game/audio';
 import { ACHIEVEMENTS } from '../lib/achievements';
 
@@ -66,6 +66,11 @@ export default function LightItUpPage() {
   const stopAmb = useRef<(() => void) | null>(null);
 
   const webgl = useMemo(hasWebGL, []);
+  const worldTheme = useMemo<Theme>(() => {
+    const forced = new URLSearchParams(location.search).get('theme') as Theme | null; // ?theme=desert previews any world
+    if (forced && ALL_THEMES.includes(forced)) return forced;
+    return place ? themeFor({ motif: place.art.motif, env: place.env, climate: place.climate, countryCode: place.countryCode, lat: place.lat, lng: place.lng }) : 'europe';
+  }, [place]);
   const player = profiles.find((p) => p.id === playerId) ?? profiles[0];
   const companion = profiles.find((p) => p.id !== player.id) ?? profiles[0];
   const needSave = !!place && !saved;
@@ -109,7 +114,7 @@ export default function LightItUpPage() {
     holder.current.appendChild(cv);
     try {
       scene = new GameScene({
-        canvas: cv, theme: themeFor(place.art.motif, place.env, place.countryCode), seed: place.id, reduced, mobile,
+        canvas: cv, theme: worldTheme, seed: place.id, reduced, mobile,
         player: { settings: player.character, celebration: celebrationFor(player.id) },
         companion: { settings: companion.character, celebration: celebrationFor(companion.id) },
         events: {
@@ -169,7 +174,7 @@ export default function LightItUpPage() {
       {status === 'loading' && <div className="game-loading" role="status"><LogoMark size={56} animated /><span>Building the miniature world…</span></div>}
 
       <div className="game-top">
-        <div className="panel game-pill"><CharacterPortrait c={player.character} size={36} label={player.name} /><div><b>{player.name}</b><div className="small muted">exploring {place.name}</div></div>
+        <div className="panel game-pill"><CharacterPortrait c={player.character} size={36} label={player.name} /><div><b>{player.name}</b><div className="small muted">exploring {place.name} · {PALETTES[worldTheme].label}</div></div>
           {profiles.length > 1 && !busy && <button className="btn sm ghost" onClick={() => setPlayerId(companion.id)} aria-label={`Switch to ${companion.name}`}>Switch</button>}</div>
         <div className="row" style={{ gap: 8 }}>
           {!busy && <button className="btn sm panel" onClick={() => { record(); if (game.current) game.current.skip(); else leave(true); }} title="Light it up right away and return to the globe"><Icon name="right" />Skip</button>}

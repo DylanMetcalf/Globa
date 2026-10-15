@@ -96,3 +96,17 @@ export const altToZoom = (alt: number) => Math.max(2, Math.min(15, 2 + Math.log2
 export const zoomToAlt = (zoom: number) => Math.max(0.05, 2.5 / 2 ** ((zoom - 2) / 1.9));
 export const altToClusterKm = (alt: number) => (alt > 1.6 ? 900 : alt > 1.0 ? 450 : alt > 0.6 ? 200 : 0);
 export const zoomToClusterKm = (zoom: number) => altToClusterKm(zoomToAlt(zoom));
+
+const DARK: Record<MarkerState, string> = { activated: '#b9812a', visited: '#237a50', planned: '#16877c', saved: '#5a52b3', match: '#8d96b8', discover: '#4e63b5' };
+
+/** Glossy, sphere-like marker glyph (SVG string) shared by the globe and the 2D map. */
+export function markerSvg(state: MarkerState, selected: boolean, size: number): string {
+  const c = STATE_COLOR[state]; const d = DARK[state]; const shape = STATE_SHAPE[state];
+  const id = `mg-${state}`; const sw = selected ? 2.6 : 1.8;
+  const grad = `<defs><radialGradient id="${id}" cx=".34" cy=".28" r=".85"><stop offset="0" stop-color="#fff"/><stop offset=".28" stop-color="${c}"/><stop offset="1" stop-color="${d}"/></radialGradient></defs>`;
+  const body = shape === 'square' ? `<rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="url(#${id})" stroke="#06101f" stroke-width="${sw}"/><path d="M8 12.6l3 3 5.2-6" fill="none" stroke="#06231a" stroke-width="2.2" stroke-linecap="round"/>`
+    : shape === 'diamond' ? `<path d="M12 1.8l10 10.2-10 10.2L2 12z" fill="url(#${id})" stroke="#06101f" stroke-width="${sw}" stroke-linejoin="round"/>`
+    : shape === 'star' ? `<path d="M12 1.2l3.1 6.7 7.3.9-5.4 5 1.5 7.2L12 17.3 5.5 21l1.5-7.2-5.4-5 7.3-.9z" fill="url(#${id})" stroke="#06101f" stroke-width="${sw}" stroke-linejoin="round"/>`
+    : `<circle cx="12" cy="12" r="8.2" fill="url(#${id})" stroke="#06101f" stroke-width="${sw}"/><ellipse cx="9.2" cy="8.6" rx="2.6" ry="1.7" fill="#fff" opacity=".75" transform="rotate(-30 9.2 8.6)"/>`;
+  return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${grad}${body}</svg>`;
+}
