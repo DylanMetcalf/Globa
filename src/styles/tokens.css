@@ -1,0 +1,112 @@
+/* GLOBA design tokens. Light = "ivory", dark = "midnight". The Explore stage, intro and game always use the night scope. */
+:root {
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-ui: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* brand */
+  --midnight-950: #060a18;
+  --midnight-900: #0a1030;
+  --midnight-800: #111a42;
+  --midnight-700: #1a2559;
+  --ink: #10141f;
+  --ivory: #f7f2e8;
+  --stone-100: #efe9db;
+  --stone-200: #e2dac7;
+  --teal-600: #0e7c78;
+  --teal-500: #19a597;
+  --turquoise: #3dd6c6;
+  --lavender: #aaa4ea;
+  --lavender-deep: #6c64c4;
+  --amber: #f2b84b;
+  --gold: #ffd884;
+  --leaf: #4fbf86;
+  --coral: #ef7d6a;
+
+  /* state colours (always paired with an icon/shape + label) */
+  --st-saved: var(--lavender);
+  --st-planned: var(--turquoise);
+  --st-visited: var(--leaf);
+  --st-activated: var(--gold);
+  --st-selected: #ffffff;
+  --st-unavailable: #8d92a8;
+
+  /* spacing / radius / motion */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 72px;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 26px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 140ms; --dur-2: 260ms; --dur-3: 480ms; --dur-4: 900ms;
+  --rail-w: 84px;
+  --tab-h: 64px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+
+  color-scheme: light;
+  /* light theme */
+  --bg: #f7f2e8;
+  --bg-2: #efe9db;
+  --surface: #fffdf8;
+  --surface-2: #f4efe3;
+  --surface-3: #e9e2d0;
+  --text: #121626;
+  --text-2: #444a63;
+  --text-3: #6a7089;
+  --line: rgba(18, 22, 38, 0.12);
+  --line-strong: rgba(18, 22, 38, 0.24);
+  --accent: #0e7c78;
+  --accent-2: #19a597;
+  --accent-soft: rgba(14, 124, 120, 0.12);
+  --on-accent: #ffffff;
+  --warn: #9a5b00;
+  --warn-soft: rgba(242, 184, 75, 0.2);
+  --danger: #b3382a;
+  --shadow-1: 0 1px 2px rgba(18, 22, 38, 0.06), 0 4px 14px rgba(18, 22, 38, 0.06);
+  --shadow-2: 0 8px 30px rgba(18, 22, 38, 0.14);
+  --focus: #0b63d6;
+  --glass: rgba(255, 253, 248, 0.82);
+}
+
+:root[data-theme='dark'], .night {
+  color-scheme: dark;
+  --bg: #070b1b;
+  --bg-2: #0b1130;
+  --surface: #101839;
+  --surface-2: #151f48;
+  --surface-3: #1d2a5d;
+  --text: #f2eee4;
+  --text-2: #bfc4dc;
+  --text-3: #8f96b6;
+  --line: rgba(190, 200, 255, 0.14);
+  --line-strong: rgba(190, 200, 255, 0.3);
+  --accent: #3dd6c6;
+  --accent-2: #2ab8aa;
+  --accent-soft: rgba(61, 214, 198, 0.14);
+  --on-accent: #04201d;
+  --warn: #ffd884;
+  --warn-soft: rgba(242, 184, 75, 0.16);
+  --danger: #ff9b8b;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 18px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 14px 44px rgba(0, 0, 0, 0.55);
+  --focus: #8cc4ff;
+  --glass: rgba(12, 18, 46, 0.78);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='system'] {
+    color-scheme: dark;
+    --bg: #070b1b; --bg-2: #0b1130; --surface: #101839; --surface-2: #151f48; --surface-3: #1d2a5d;
+    --text: #f2eee4; --text-2: #bfc4dc; --text-3: #8f96b6; --line: rgba(190, 200, 255, 0.14); --line-strong: rgba(190, 200, 255, 0.3);
+    --accent: #3dd6c6; --accent-2: #2ab8aa; --accent-soft: rgba(61, 214, 198, 0.14); --on-accent: #04201d;
+    --warn: #ffd884; --warn-soft: rgba(242, 184, 75, 0.16); --danger: #ff9b8b;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 18px rgba(0, 0, 0, 0.3); --shadow-2: 0 14px 44px rgba(0, 0, 0, 0.55);
+    --focus: #8cc4ff; --glass: rgba(12, 18, 46, 0.78);
+  }
+}
+
+/* Reduced motion: honour the OS and the in-app override (html[data-motion='reduced']). */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-motion='system'] { --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; --dur-4: 0ms; }
+}
+:root[data-motion='reduced'] { --dur-1: 0ms; --dur-2: 0ms; --dur-3: 0ms; --dur-4: 0ms; }
