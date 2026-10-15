@@ -33,7 +33,7 @@ export function useMedia(query: string): boolean {
   return m;
 }
 
-export const useIsMobile = () => useMedia('(max-width: 820px)');
+export const useIsMobile = () => useMedia('(max-width: 820px), (max-height: 520px) and (pointer: coarse)');
 
 export function useReducedMotion(): boolean {
   const pref = useStore((s) => s.settings.reducedMotion);

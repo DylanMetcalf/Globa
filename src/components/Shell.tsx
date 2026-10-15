@@ -40,7 +40,7 @@ export function Shell() {
     <div className="app">
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="topbar-m">
-        <NavLink to="/" aria-label="GLOBA home"><LogoMark size={34} /></NavLink>
+        <NavLink to="/" aria-label="GLOBA home" className="brand-m"><LogoMark size={38} />GLOBA</NavLink>
         <div className="row">
           <button className="btn ghost icon sm" aria-label="Open travel assistant" style={{ color: '#fff' }} onClick={() => setAssistantOpen(true)}><Icon name="sparkles" /></button>
           <NavLink to="/settings" className="btn ghost icon sm" aria-label="Settings" style={{ color: '#fff' }}><Icon name="settings" /></NavLink>

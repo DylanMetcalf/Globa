@@ -4,6 +4,8 @@
   "description": "Your world. Your adventures. Your story.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "any",
+  "categories": ["travel", "lifestyle"],
   "background_color": "#070b1b",
   "theme_color": "#070b1b",
   "icons": [

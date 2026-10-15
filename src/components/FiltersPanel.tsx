@@ -77,7 +77,7 @@ export function FiltersPanel({ criteria, onChange, showChips = true }: { criteri
           <select className="input" style={{ width: 100 }} aria-label="Budget currency" value={c.budget?.currency ?? homeCurrency} onChange={(e) => set({ budget: { amount: c.budget?.amount ?? 0, currency: e.target.value, period: c.budget?.period ?? 'month' } })}>
             {CURRENCIES.map((x) => <option key={x}>{x}</option>)}
           </select>
-          <select className="input" style={{ width: 110 }} aria-label="Budget period" value={c.budget?.period ?? 'month'} onChange={(e) => set({ budget: { amount: c.budget?.amount ?? 0, currency: c.budget?.currency ?? homeCurrency, period: e.target.value as 'day' | 'week' | 'month' } })}>
+          <select className="input" style={{ width: 140 }} aria-label="Budget period" value={c.budget?.period ?? 'month'} onChange={(e) => set({ budget: { amount: c.budget?.amount ?? 0, currency: c.budget?.currency ?? homeCurrency, period: e.target.value as 'day' | 'week' | 'month' } })}>
             <option value="day">per day</option><option value="week">per week</option><option value="month">per month</option>
           </select>
         </div>

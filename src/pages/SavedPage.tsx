@@ -152,7 +152,7 @@ export default function SavedPage() {
       </div>
 
       <div className="row wrap saved-toolbar">
-        <div className="seg" role="tablist" aria-label="Filter by status">
+        <div className="seg scroll" role="tablist" aria-label="Filter by status">
           {(['all', 'saved', 'planned', 'visited', 'lit'] as Tab[]).map((t) => (
             <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)}>{t === 'all' ? `All ${entries.length}` : t === 'lit' ? `Lit up ${counts.lit}` : STATUS_COPY[t].label}</button>
           ))}
